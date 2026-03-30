@@ -1,0 +1,52 @@
+:root,
+page {
+  --brand: var(--color-brand);
+  --page-bg: var(--color-bg-page);
+  --surface-card: var(--color-bg-card);
+  --surface-soft: var(--color-bg-soft);
+  --surface-brand-soft: var(--color-bg-primary-soft);
+  --surface-danger-soft: var(--color-bg-danger-soft);
+  --surface-warning-soft: var(--color-bg-warning-soft);
+
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-placeholder: var(--color-text-placeholder);
+  --text-on-brand: var(--color-text-on-primary);
+  --text-brand-strong: var(--color-text-primary-strong);
+  --text-danger: var(--color-text-danger);
+  --text-warning: var(--color-text-warning);
+
+  --border-soft: var(--color-border-soft);
+  --border-strong: var(--color-border-strong);
+  --danger: var(--color-danger);
+  --warning: var(--color-warning);
+  --success: var(--color-success);
+
+  --control-radius: var(--radius-md);
+  --surface-radius: var(--radius-lg);
+  --control-height: var(--height-input);
+  --primary-button-height: var(--height-btn);
+  --page-gap: var(--page-section-gap);
+  --card-gap: var(--space-md);
+
+  --button-primary-bg: var(--brand);
+  --button-primary-text: var(--text-on-brand);
+  --button-secondary-bg: var(--surface-soft);
+  --button-secondary-text: var(--text-primary);
+  --button-danger-bg: var(--danger);
+  --button-danger-text: var(--text-on-brand);
+
+  --form-item-bg: var(--surface-card);
+  --form-item-border: var(--border-soft);
+  --form-item-label: var(--text-primary);
+  --form-item-value: var(--text-primary);
+  --form-item-placeholder: var(--text-placeholder);
+  --form-item-error: var(--text-danger);
+
+  --card-bg: var(--surface-card);
+  --card-border: var(--border-soft);
+  --card-shadow: var(--shadow-card);
+
+  --bottom-bar-bg: rgba(248, 246, 240, 0.94);
+  --bottom-bar-border: var(--border-soft);
+}

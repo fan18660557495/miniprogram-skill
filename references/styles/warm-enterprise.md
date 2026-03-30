@@ -34,6 +34,21 @@
 - 警示色：`#FF9500`
 - 危险色：`#FF3B30`
 
+建议先映射成语义层，再在页面或组件中使用：
+
+- `brand`
+- `page-bg`
+- `surface-card`
+- `surface-soft`
+- `text-primary`
+- `text-secondary`
+- `text-placeholder`
+- `border-soft`
+- `border-strong`
+- `danger`
+- `warning`
+- `success`
+
 ### 圆角
 
 - 小圆角：`12px`
@@ -113,6 +128,12 @@
 - 使用完整容器承载
 - focus 状态清楚
 - 占位文字较浅
+
+如果要做成可复用样式库，不要直接停在本文件。
+继续读取：
+
+- `references/core/design-tokens.md`
+- `references/core/component-styles.md`
 
 ## 交互偏好
 

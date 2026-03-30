@@ -6,9 +6,11 @@
 
 这不是一个组件库，而是一套给 AI 和团队协作都能直接使用的小程序前端规范包。
 
-它主要解决 5 类问题：
+它主要解决 7 类问题：
 - 中文输出和中文文案统一
-- 页面与交互规范统一
+- 页面结构和信息层级统一
+- 表单与反馈规则统一
+- 语音交互和录音状态统一
 - 组件边界和复用方式统一
 - 小程序工程约束统一
 - 风格方案与 design token 复用
@@ -20,10 +22,8 @@
 - 其他以小程序为主要运行环境的前端项目
 
 它提供的不是某个平台专属配置，而是一套可跨项目复用的内容：
-- 中文输出规范
-- 通用交互规范
-- 组件设计规范
-- 工程实现约束
+- 短入口文件
+- 任务型核心规范
 - 可直接复用的风格方案
 - 可复制的 token 文件
 - token 导出脚本
@@ -32,6 +32,7 @@
 
 - 中文优先：说明、注释、交互提示、错误文案默认使用中文
 - 小程序优先：默认按移动端、小程序体验做设计和实现决策
+- 渐进披露：`SKILL.md` 只放入口和读取路径，详细规则按任务读取
 - 规范分层：`core` 负责稳定规则，`styles` 负责具体风格方案
 - 风格可复用：内置一套暖色企业工具型方案
 - token 可迁移：提供可复制的 CSS token，并可导出为 JSON 和 SCSS
@@ -49,22 +50,29 @@
 - 小程序优先
 - 工具型产品优先
 - 清楚、稳定、易维护
+- 按任务读取，避免一次加载过多上下文
 
 ## 最小示例
 
 如果你要为一个新的小程序项目建立统一规范，可以这样使用：
 
 1. 先读 `SKILL.md`
-2. 页面设计优先读 `references/core/interaction.md`
-3. 组件设计优先读 `references/core/components.md`
-4. 中文文案优先读 `references/core/writing.md`
-5. 如果项目没有现成风格，直接复用 `references/styles/warm-enterprise.md`
-6. 需要 token 时复制 `assets/tokens/warm-enterprise.css`
+2. 做整体基线时读 `references/core/overview.md`
+3. 做页面结构时读 `references/core/page-flow.md`
+4. 做表单和反馈时读 `references/core/form-and-feedback.md`
+5. 做语音交互时读 `references/core/voice.md`
+6. 做组件设计时读 `references/core/component-boundary.md`
+7. 做语义 token 时读 `references/core/design-tokens.md`
+8. 做按钮、卡片、表单项、吸底栏样式时读 `references/core/component-styles.md`
+9. 中文文案优先读 `references/core/writing.md`
+10. 做落地验收或代码评审时读 `references/core/acceptance.md`
+11. 如果项目没有现成风格，直接复用 `references/styles/warm-enterprise.md`
+12. 需要 token 时复制 `assets/tokens/warm-enterprise.css`
 
 ## 目录结构
 
 ```text
-miniprogram-skill/
+skills/
 ├── README.md
 ├── SKILL.md
 ├── references/
@@ -81,10 +89,10 @@ miniprogram-skill/
   给人看的说明文档，介绍技能包怎么用、目录怎么组织。
 
 - `SKILL.md`
-  给模型看的说明文件，定义这个技能包在什么场景下使用、如何读取内容、有哪些硬规则。
+  给模型看的入口文件，定义这个技能包在什么场景下使用、如何读取内容、有哪些硬规则。
 
 - `references/core/`
-  存放长期稳定的通用规范，包括基础规范、交互规范、组件规范、文案规范、工程约束。
+  存放按任务拆分的稳定规范，包括基线、页面结构、表单与反馈、语音交互、组件边界、语义 token、组件样式、文案规范、工程约束。
 
 - `references/styles/`
   存放可直接复用的风格方案。后续新增不同风格时，优先放在这里。
@@ -99,11 +107,16 @@ miniprogram-skill/
 
 ### 通用规范
 
-- `references/core/foundation.md`
-- `references/core/interaction.md`
-- `references/core/components.md`
+- `references/core/overview.md`
+- `references/core/page-flow.md`
+- `references/core/form-and-feedback.md`
+- `references/core/voice.md`
+- `references/core/component-boundary.md`
+- `references/core/design-tokens.md`
+- `references/core/component-styles.md`
 - `references/core/writing.md`
 - `references/core/engineering.md`
+- `references/core/acceptance.md`
 
 ### 风格方案
 
@@ -112,10 +125,12 @@ miniprogram-skill/
 ### Token 资产
 
 - `assets/tokens/warm-enterprise.css`
+- `assets/tokens/warm-enterprise-semantic.css`
 
 ### 脚本
 
 - `scripts/export_tokens.py`
+- `scripts/check_skill.py`
 
 ## 使用方式
 
@@ -125,8 +140,9 @@ miniprogram-skill/
 
 1. 先读 `SKILL.md`
 2. 再按任务去读 `references/core/` 下对应文件
-3. 如果需要具体风格，再读 `references/styles/`
-4. 如果需要直接落地 token，使用 `assets/tokens/` 中的文件
+3. 落地后用 `references/core/acceptance.md` 做最小验收
+4. 只在需要视觉方案时读 `references/styles/`
+5. 只在需要直接落地 token 时读 `assets/tokens/`
 
 ## 2. 作为风格方案库使用
 
@@ -154,6 +170,19 @@ python3 scripts/export_tokens.py assets/tokens/warm-enterprise.css
 python3 scripts/export_tokens.py assets/tokens/warm-enterprise.css --output-dir /tmp/out
 ```
 
+## 检查 skill
+
+执行：
+
+```bash
+python3 scripts/check_skill.py
+```
+
+默认会检查：
+- Markdown 中引用的本地路径是否存在
+- 核心规范文件是否带有自检段落
+- token 导出脚本能否成功处理当前两份 token 文件
+
 ## 维护建议
 
 ### 新增通用规则时
@@ -161,6 +190,9 @@ python3 scripts/export_tokens.py assets/tokens/warm-enterprise.css --output-dir 
 优先判断它是不是长期稳定、跨项目通用：
 - 如果是，放到 `references/core/`
 - 如果不是，不要轻易塞进 core
+
+优先按任务归档，而不是按抽象学科归档。
+例如优先放进“表单与反馈”或“语音交互”，而不是继续堆进一个过大的“交互规范”。
 
 ### 新增风格时
 
@@ -177,15 +209,12 @@ python3 scripts/export_tokens.py assets/tokens/warm-enterprise.css --output-dir 
 - 文案口吻
 - 不适用场景
 
-### 新增案例时
+### 控制文件体量
 
-如果后续积累了多个真实项目案例，建议再新增一层：
-
-```text
-references/cases/
-```
-
-目前这套结构先保持 `core + styles`，避免过早拆得过细。
+- `SKILL.md` 只保留入口信息和读取路径
+- 单个 `core` 文件只覆盖一个任务域
+- 当某个文件开始明显跨多个任务域时，再拆分
+- 避免创建大量很小但边界模糊的文件
 
 ## 平台说明
 
